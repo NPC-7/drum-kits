@@ -3,23 +3,23 @@ var numberOfDrumButtons = document.querySelectorAll(".drum").length;
 for (var i=0; i<numberOfDrumButtons; i++){
 
   document.querySelectorAll(".drum")[i].addEventListener("click", handleClick);
+
 }
 
-//
-// document.querySelector("button.w.drum").addEventListener("click", handleClick);
-// document.querySelector("button.a.drum").addEventListener("click", handleClick);
-// document.querySelector("button.s.drum").addEventListener("click", handleClick);
-// document.querySelector("button.d.drum").addEventListener("click", handleClick);
-// document.querySelector("button.j.drum").addEventListener("click", handleClick);
-// document.querySelector("button.k.drum").addEventListener("click", handleClick);
-// document.querySelector("button.l.drum").addEventListener("click", handleClick);
-//
 
 function handleClick () {
 
   var buttonInnerHTML = this.innerHTML;
+  makeSound(buttonInnerHTML);
 
-  switch (buttonInnerHTML) {
+  buttonAnimation(buttonInnerHTML);
+}
+
+document.addEventListener("keypress",function(){makeSound(event.key); buttonAnimation(event.key);});
+
+function makeSound(key){
+
+  switch (key) {
     case "w":
       var tom1 = new Audio('sounds/tom-1.mp3');
       tom1.play();
@@ -54,3 +54,37 @@ function handleClick () {
   }
 
 }
+
+function buttonAnimation(currentKey) {
+  var activeButton = document.querySelector("."+currentKey);
+  activeButton.classList.add("pressed");
+
+  setTimeout(function () {
+    activeButton.classList.remove("pressed");
+  }, 100);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+// document.querySelector("button.w.drum").addEventListener("click", handleClick);
+// document.querySelector("button.a.drum").addEventListener("click", handleClick);
+// document.querySelector("button.s.drum").addEventListener("click", handleClick);
+// document.querySelector("button.d.drum").addEventListener("click", handleClick);
+// document.querySelector("button.j.drum").addEventListener("click", handleClick);
+// document.querySelector("button.k.drum").addEventListener("click", handleClick);
+// document.querySelector("button.l.drum").addEventListener("click", handleClick);
+//
